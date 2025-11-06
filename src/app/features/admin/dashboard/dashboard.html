@@ -1,0 +1,157 @@
+<div class="admin-layout">
+  <app-sidebar></app-sidebar>
+  
+  <div class="admin-main">
+    <app-header></app-header>
+    
+    <main class="admin-content">
+      <div class="dashboard-container">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card" *ngFor="let stat of adminStats">
+            <div class="stat-icon">{{stat.icon}}</div>
+            <div class="stat-content">
+              <h3>{{stat.value}}</h3>
+              <p>{{stat.label}}</p>
+              <span class="stat-change" [class.positive]="stat.change.includes('+')" 
+                    [class.negative]="stat.change.includes('-')">
+                {{stat.change}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-grid">
+          <div class="main-content">
+            <div class="content-card">
+              <h2>Recent Users</h2>
+              <div class="table-container">
+                <table class="users-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Status</th>
+                      <th>Join Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of recentUsers">
+                      <td class="user-info">
+                        <div class="user-avatar-small">
+                          {{getUserInitials({firstName: user.name.split(' ')[0], lastName: user.name.split(' ')[1]})}}
+                        </div>
+                        {{user.name}}
+                      </td>
+                      <td>{{user.email}}</td>
+                      <td>
+                        <span class="status-badge" [class.active]="user.status === 'Active'" 
+                              [class.inactive]="user.status === 'Inactive'">
+                          {{user.status}}
+                        </span>
+                      </td>
+                      <td>{{user.joinDate}}</td>
+                      <td>
+                        <button class="btn-action view">View</button>
+                        <button class="btn-action edit">Edit</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-content">
+            <div class="content-card">
+              <h2>Quick Stats</h2>
+              <div class="quick-stats">
+                <div class="quick-stat">
+                  <span class="stat-label">New Users Today</span>
+                  <span class="stat-value">12</span>
+                </div>
+                <div class="quick-stat">
+                  <span class="stat-label">Active Sessions</span>
+                  <span class="stat-value">89</span>
+                </div>
+                <div class="quick-stat">
+                  <span class="stat-label">System Uptime</span>
+                  <span class="stat-value">99.8%</span>
+                </div>
+                <div class="quick-stat">
+                  <span class="stat-label">Pending Tasks</span>
+                  <span class="stat-value">5</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-card">
+              <h2>Quick Actions</h2>
+              <div class="admin-actions">
+                <button class="admin-btn primary">
+                  <span class="btn-icon">👥</span>
+                  Manage Users
+                </button>
+                <button class="admin-btn secondary">
+                  <span class="btn-icon">📚</span>
+                  Add Course
+                </button>
+                <button class="admin-btn warning">
+                  <span class="btn-icon">📊</span>
+                  View Reports
+                </button>
+                <button class="admin-btn danger">
+                  <span class="btn-icon">🔒</span>
+                  Security Logs
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Health -->
+        <div class="system-health">
+          <div class="content-card">
+            <h2>System Health</h2>
+            <div class="health-grid">
+              <div class="health-item">
+                <div class="health-icon">💾</div>
+                <div class="health-info">
+                  <span class="health-label">Server Load</span>
+                  <div class="health-bar">
+                    <div class="health-fill" style="width: 65%"></div>
+                  </div>
+                  <span class="health-value">65%</span>
+                </div>
+              </div>
+              <div class="health-item">
+                <div class="health-icon">🛜</div>
+                <div class="health-info">
+                  <span class="health-label">Network</span>
+                  <div class="health-bar">
+                    <div class="health-fill" style="width: 90%"></div>
+                  </div>
+                  <span class="health-value">90%</span>
+                </div>
+              </div>
+              <div class="health-item">
+                <div class="health-icon">💽</div>
+                <div class="health-info">
+                  <span class="health-label">Storage</span>
+                  <div class="health-bar">
+                    <div class="health-fill" style="width: 45%"></div>
+                  </div>
+                  <span class="health-value">45%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+    <app-footer></app-footer>
+  </div>
+</div>

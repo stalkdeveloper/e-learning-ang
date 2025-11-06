@@ -1,0 +1,76 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="account-type-badge" [class.system]="isSystemLogin" [class.platform]="!isSystemLogin">
+        {{ isSystemLogin ? 'System Access' : 'Platform Access' }}
+      </div>
+      <h2>{{ isSystemLogin ? 'System Login' : 'Platform Login' }}</h2>
+      <p>Sign in to your {{ isSystemLogin ? 'system' : 'platform' }} account</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Enter your email"
+          [class.error]="email?.invalid && email?.touched">
+        <div class="error-message" *ngIf="email?.invalid && email?.touched">
+          <span *ngIf="email?.errors?.['required']">Email is required</span>
+          <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Enter your password"
+          [class.error]="password?.invalid && password?.touched">
+        <div class="error-message" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">Password is required</span>
+          <span *ngIf="password?.errors?.['minlength']">
+            Password must be at least 6 characters
+          </span>
+        </div>
+      </div>
+
+      <!-- Compact Demo Credentials -->
+      <div class="demo-hint" *ngIf="!environment.production">
+        <p><strong>Demo Access:</strong></p>
+        <div class="demo-credentials">
+          <span class="demo-account system">admin@example.com / password</span>
+          <span class="demo-account platform">user@example.com / password</span>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-block"
+        [class.btn-system]="isSystemLogin"
+        [class.btn-platform]="!isSystemLogin"
+        [disabled]="loginForm.invalid || loading">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p *ngIf="isSystemLogin">
+        Looking for platform access? <a routerLink="/login" class="switch-link">Platform Login</a>
+      </p>
+      <p *ngIf="!isSystemLogin">
+        System administrator? <a routerLink="/admin/login" class="switch-link">System Login</a>
+      </p>
+    </div>
+  </div>
+</div>

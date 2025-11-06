@@ -1,0 +1,46 @@
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">AngularApp</a>
+    </div>
+    
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+        
+        <ng-container *ngIf="authState$ | async as authState">
+          <ng-container *ngIf="!authState.isAuthenticated">
+            <li><a routerLink="/login" routerLinkActive="active">Platform Login</a></li>
+            <li><a (click)="navigateToAdminLogin()" class="admin-link">System Login</a></li>
+          </ng-container>
+          
+          <ng-container *ngIf="authState.isAuthenticated">
+            <!-- Show user dashboard link for platform users -->
+            <li *ngIf="authService.isPlatformUser()">
+              <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+            </li>
+            
+            <!-- Show admin panel link for system users -->
+            <li *ngIf="authService.isSystemUser()">
+              <a routerLink="/admin/dashboard" routerLinkActive="active">Admin Panel</a>
+            </li>
+            
+            <li class="user-menu">
+              <div class="user-avatar" *ngIf="userDisplay$">
+                <span class="avatar-initials">{{userDisplay$.initials}}</span>
+              </div>
+              <div class="user-info">
+                <span class="welcome">Welcome, {{userDisplay$?.fullName}}</span>
+                <span class="account-type" [class.system]="authService.isSystemUser()" 
+                      [class.platform]="authService.isPlatformUser()">
+                  {{authService.isSystemUser() ? 'System User' : 'Platform User'}}
+                </span>
+              </div>
+              <button (click)="logout()" class="logout-btn">Logout</button>
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+    </nav>
+  </div>
+</header>

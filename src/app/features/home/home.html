@@ -1,0 +1,52 @@
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Welcome to AngularApp</h1>
+      <p class="hero-subtitle">A modern web application with role-based access control</p>
+      <div class="hero-buttons">
+        <a routerLink="/login" class="btn btn-platform">Platform User Login</a>
+        <a routerLink="/admin/login" class="btn btn-system">System User Login</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <h2>Access Levels</h2>
+    <div class="features-grid">
+      <div class="feature-card platform-feature">
+        <div class="feature-icon">👤</div>
+        <h3>Platform Users</h3>
+        <p>Regular users who can access their personal dashboard, manage their profile, and use platform features.</p>
+        <ul>
+          <li>Personal Dashboard</li>
+          <li>Profile Management</li>
+          <li>Platform Features</li>
+        </ul>
+      </div>
+      
+      <div class="feature-card system-feature">
+        <div class="feature-icon">⚙️</div>
+        <h3>System Users</h3>
+        <p>Administrators and system operators with access to admin panel, user management, and system settings.</p>
+        <ul>
+          <li>Admin Dashboard</li>
+          <li>User Management</li>
+          <li>System Configuration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <p>Choose your login method based on your access level</p>
+    <div class="cta-buttons">
+      <a routerLink="/login" class="btn btn-large btn-platform">Platform Access</a>
+      <a routerLink="/admin/login" class="btn btn-large btn-system">System Access</a>
+    </div>
+  </div>
+</section>

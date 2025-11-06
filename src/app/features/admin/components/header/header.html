@@ -1,0 +1,31 @@
+<header class="admin-header">
+  <div class="header-content">
+    <div class="header-left">
+      <h1 class="page-title">Admin Dashboard</h1>
+      <p class="page-subtitle">System administration and management</p>
+    </div>
+    
+    <div class="header-right">
+      <button class="btn-visit-site" (click)="visitSite()">
+        <span class="btn-icon">🌐</span>
+        Visit Site
+      </button>
+      
+      <div class="user-menu" *ngIf="authState$ | async as authState">
+        <div class="user-info">
+          <div class="user-avatar">
+            {{getUserInitials(authState.user)}}
+          </div>
+          <div class="user-details">
+            <span class="user-name">{{authState.user?.firstName}} {{authState.user?.lastName}}</span>
+            <span class="user-role">System Administrator</span>
+          </div>
+        </div>
+        <button class="btn-logout" (click)="logout()">
+          <span class="logout-icon">🚪</span>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
